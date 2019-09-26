@@ -2,6 +2,10 @@
   .container-fluid
     .pt-3.font-weight-bold
       | Tickets
+      | {{ $ctrl.felix }}
+    .BOTON-CREAR
+      button.btn.btn-primary(ng-click="$ctrl.openCreateTicketModal()")
+        | Crear
     .card-deck.mt-3
       .card(ng-repeat="ticket in $ctrl.tickets")
         .card-body

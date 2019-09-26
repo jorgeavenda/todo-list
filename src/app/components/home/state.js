@@ -9,10 +9,9 @@ const homeState = {
   },
   resolve: {
     board: [
-      '$http',
-      function($http) {
-        return $http.get('http://todolist.koeonline.net/api/tablero')
-        .then(res => res.data);
+      'BoardsService',
+      function(BoardsService) {
+        return BoardsService.query().then(res => res.data);
       }
     ]
   }

@@ -9,24 +9,11 @@ const boardState = {
   },
   resolve: {
     tickets: [
-      '$http',
+      'TicketsService',
       '$stateParams',
-      function($http, $stateParams) {
+      function(TicketsService, $stateParams) {
         const boardId = $stateParams.boardId;
-
-        // http://todolist.koeonline.net/api/tablero/{idTablero}
-        // Detalle de un solo tablero
-
-        // GET
-        // http://todolist.koeonline.net/api/tablero/{idTablero}/ticket
-
-        // $http.get('http://todolist.koeonline.net/api/tablero/'+boardId)
-        // .then(res => {
-        //   console.log('res.data: ', res.data);
-        // });
-
-        return $http.get('http://todolist.koeonline.net/api/tablero/'+boardId+'/ticket')
-        .then(res => res.data);
+        return TicketsService.query(boardId).then(res => res.data);
       }
     ]
   }

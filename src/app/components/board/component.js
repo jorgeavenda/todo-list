@@ -1,12 +1,21 @@
 import template from './template.pug';
 import styles from './styles.scss';
+import { BoardController } from './controller.js';
+import { ticketModalModule } from  './modal/component.js';
 
 const component = {
-  bindings: { tickets: '<' },
+  controller: BoardController,
+  bindings: {
+    tickets: '<'
+  },
   template: template()
 };
 
-const boardModule = angular.module('app.board', [])
-                          .component('boardComponent', component);
+const DEPENDENCIES = [
+  ticketModalModule.name
+];
+
+const boardModule = angular.module('app.board', DEPENDENCIES)
+                           .component('boardComponent', component);
 
 export { boardModule };
