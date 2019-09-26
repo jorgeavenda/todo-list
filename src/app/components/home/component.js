@@ -1,6 +1,10 @@
 import template from './template.pug';
+import styles from './styles.scss';
 
 const component = {
+  bindings: {
+    board: '<'
+  },
   template: template()
 };
 

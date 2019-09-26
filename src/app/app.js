@@ -3,12 +3,17 @@ import 'oclazyload';
 import 'bootstrap';
 import 'bootstrap/scss/bootstrap.scss';
 import { appRoutes } from './app.routes.js';
+import { headerModule } from './components/layout/header/component.js';
 import './app.scss';
 
-const DEPENDENCIES = [
+const modules = [
+  headerModule.name
+];
+
+const DEPENDENCIES = modules.concat([
   'ui.router',
   'oc.lazyLoad'
-];
+]);
 
 function runConfig($http) {
   var koeApiToken = window.localStorage.getItem('koeApiToken');
