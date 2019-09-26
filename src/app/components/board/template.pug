@@ -1,0 +1,13 @@
+.board.h-100.bg-light
+  .container-fluid
+    .pt-3.font-weight-bold
+      | Tickets
+    .card-deck.mt-3
+      .card(ng-repeat="ticket in $ctrl.tickets")
+        .card-body
+          h5.card-title
+            | {{ticket.title}}
+          p.card-text
+            | {{ticket.description}}
+          //- a.btn.btn-primary.stretched-link(ui-sref="board({ boardId: ticket.id})")
+          //-   | Ir al tablero
