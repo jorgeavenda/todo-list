@@ -6,17 +6,27 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
+        exclude: /node_modules/,
         use: {
           loader: "babel-loader"
         }
       },
-      { 
+      {
         test: /\.html$/,
-        use: ['html-loader']
+        use: [
+          {
+            loader: 'html-loader',
+            options: { minimize: true }
+          }
+        ]
       },
       { 
         test: /\.pug$/,
         use: ['pug-loader']
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader',MiniCssExtractPlugin.loader, "css-loader"]
       },
       {
         test: /\.scss$/i,
@@ -26,7 +36,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html"
+      template: "./src/index.html",
+      filename: "./index.html"
     }),
     new MiniCssExtractPlugin({
       filename: "[name].css",
