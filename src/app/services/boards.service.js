@@ -1,11 +1,7 @@
 function BoardsService ($http) {
-  this.query = () => {
-    return $http.get('http://todolist.koeonline.net/api/tablero');
-  };
+  this.query = () => $http.get('http://todolist.koeonline.net/api/tablero');
 
-  this.get = (id) => {
-    return $http.get(`http://todolist.koeonline.net/api/tablero/${id}`);
-  };
+  this.get = (id) => $http.get(`http://todolist.koeonline.net/api/tablero/${id}`);
 };
 
 BoardsService.$inject = ['$http'];

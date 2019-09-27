@@ -1,23 +1,17 @@
 function TicketsService ($http) {
-  this.query = (idBoard) => {
-    return $http.get(`http://todolist.koeonline.net/api/tablero/${idBoard}/ticket`);
+  this.setBoardId = (id) => {
+    this.boardId = id;
   };
 
-  this.get = (id) => {
-    return $http.get(`http://todolist.koeonline.net/api/ticket/${id}`)
-  };
+  this.query = (idBoard) => $http.get(`http://todolist.koeonline.net/api/tablero/${idBoard}/ticket`);
 
-  this.create = (idBoard, ticket) => {
-    return $http.post(`http://todolist.koeonline.net/api/tablero/${idBoard}/ticket`, ticket);
-  };
+  this.get = (id) => $http.get(`http://todolist.koeonline.net/api/ticket/${id}`);
 
-  this.delete = (id) => {
-    return $http.delete(`http://todolist.koeonline.net/api/ticket/${id}`);
-  };
+  this.create = (idBoard, ticket) => $http.post(`http://todolist.koeonline.net/api/tablero/${idBoard}/ticket`, ticket);
 
-  this.update = (id) => {
-    return $http.put(`http://todolist.koeonline.net/api/ticket/${id}`);
-  };
+  this.delete = (id) => $http.delete(`http://todolist.koeonline.net/api/ticket/${id}`);
+
+  this.update = (ticket) => $http.put(`http://todolist.koeonline.net/api/ticket/${ticket.id}`, ticket);
 };
 
 TicketsService.$inject = ['$http'];
