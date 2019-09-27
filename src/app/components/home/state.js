@@ -8,7 +8,7 @@ const homeState = {
                  .then(mod => $ocLazyLoad.load(mod.homeModule));
   },
   resolve: {
-    board: [
+    boards: [
       'BoardsService',
       function(BoardsService) {
         return BoardsService.query().then(res => res.data);

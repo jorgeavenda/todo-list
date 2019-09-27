@@ -1,17 +1,46 @@
 .board.h-100.bg-light
   .container-fluid
-    .pt-3.font-weight-bold
-      | Tickets
-      | {{ $ctrl.felix }}
-    .BOTON-CREAR
-      button.btn.btn-primary(ng-click="$ctrl.openCreateTicketModal()")
-        | Crear
-    .card-deck.mt-3
-      .card(ng-repeat="ticket in $ctrl.tickets")
-        .card-body
+    .d-flex.pt-3.align-items-center
+      h4.font-weight-bold.flex-grow-1
+        | {{ $ctrl.board.name }} - {{ $ctrl.board.user  }}
+      button.btn.btn-primary(ng-click="$ctrl.openTicketModal()")
+        | Crear ticket
+    nav.mt-3(aria-label='breadcrumb')
+      ol.breadcrumb
+        li.breadcrumb-item
+          a(ui-sref="home")
+            | Tableros
+        li.breadcrumb-item.active(aria-current='page')
+          | Tickets
+
+    .row.mt-3
+      .card.board__card(ng-repeat="ticket in $ctrl.tickets")
+        div(uib-dropdown)
+          .card-header.text-white.cursor-pointer(
+            uib-dropdown-toggle
+            ng-style="{ background: ticket.estatus[0].color }"
+          )
+            | {{ ticket.estatus[0].name }}
+            span.caret
+          .dropdown-menu(uib-dropdown-menu)
+            a.dropdown-item.cursor-pointer(
+              ng-repeat="status in $ctrl.statuses"
+              ng-click='$ctrl.setStatus(ticket, status)'
+            )
+              | {{ status.name }}
+        .card-body.board__card-body
           h5.card-title
-            | {{ticket.title}}
+            | {{ ticket.title }}
+          p.card-text.board__card-body-description
+            | {{ ticket.description }}
           p.card-text
-            | {{ticket.description}}
-          //- a.btn.btn-primary.stretched-link(ui-sref="board({ boardId: ticket.id})")
-          //-   | Ir al tablero
+            small.text-muted
+              | Hora{{ ticket.estimated_time > 1 ? 's' : '' }} estimada{{ ticket.estimated_time >  1 ? 's' : '' }} {{ ticket.estimated_time }}
+        .card-footer.d-flex
+          button.btn.btn-primary.btn-sm.mr-2(
+            ng-click="$ctrl.openTicketModal(ticket)"
+            ng-if="false"
+          )
+            | Editar
+          button.btn.btn-danger.btn-sm.ml-auto(ng-click="$ctrl.delete($event, ticket)")
+            | Eliminar

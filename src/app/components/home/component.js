@@ -3,7 +3,7 @@ import styles from './styles.scss';
 
 const component = {
   bindings: {
-    board: '<'
+    boards: '<'
   },
   template: template()
 };

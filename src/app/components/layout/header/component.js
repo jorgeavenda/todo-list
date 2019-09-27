@@ -5,6 +5,6 @@ const component = {
 };
 
 const headerModule = angular.module('app.header', [])
-                          .component('headerComponent', component);
+                            .component('headerComponent', component);
 
 export { headerModule };
