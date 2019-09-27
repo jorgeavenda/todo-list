@@ -50,11 +50,23 @@ function BoardController ($uibModal, TicketsService, StatusService, AlertsServic
   };
 
   this.setStatus = (ticket, status) => {
+    SpinnerLoaderService.show();
     ticket.idStatus = parseInt(status.id, 10);
     TicketsService.update(ticket).then((res) => {
+      AlertsService.addAlert({
+        title: 'Se actualizo el ticket correctamente',
+        type: 'success'
+      });
       TicketsService.get(res.data).then(res => {
         angular.merge(ticket, res.data);
       });
+    }, () => {
+      AlertsService.addAlert({
+        title: 'Ocurrió un error al intentar actualizar el ticket. Inténtalo de nuevo',
+        type: 'danger'
+      });
+    }).finally(() => {
+      SpinnerLoaderService.hide();
     });
   };
 };

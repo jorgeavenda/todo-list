@@ -64,7 +64,10 @@
         | Estado inicial requerido
 
 .modal-footer
-  button.btn.btn-primary(ng-click="$ctrl.save($ctrl.ticketForm.$valid)")
+  button.btn.btn-primary(
+    ng-click="$ctrl.save($ctrl.ticketForm.$valid)"
+    ng-disabled="$ctrl.saving"
+  )
     | Guardar
   button.btn.btn-secondary(ng-click="$ctrl.dismiss()")
     | Salir
