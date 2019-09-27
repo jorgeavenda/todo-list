@@ -1,1 +1,70 @@
-| hola
+.modal-header
+  h4.modal-title
+    | Ticket
+.modal-body
+  form.needs-validation(
+    name="$ctrl.ticketForm"
+    novalidate
+    ng-class="{ 'was-validated' : $ctrl.ticketForm.$submitted }"
+  )
+    .form-group
+      label(for='title')
+        | Título
+      input#title.form-control(
+        type='text'
+        name="title"
+        ng-model="$ctrl.ticket.title"
+        placeholder='Título'
+        required
+      )
+      .invalid-feedback
+        | Título requerido
+    .form-group
+      label(for='description')
+        | Descripción
+      textarea#description.form-control(
+        rows="3"
+        name="description"
+        ng-model="$ctrl.ticket.description"
+        placeholder="Descripción"
+        required
+      )
+      .invalid-feedback
+        | Descripción requerida
+    .form-group
+      label(for="estimatedTime")
+        | Tiempo estimado(horas)
+      input#estimatedTime.form-control(
+        type="number"
+        name="estimated_time"
+        ng-model="$ctrl.ticket.estimated_time"
+        placeholder="Tiempo estimado(horas)"
+        min="1"
+        required
+      )
+      .invalid-feedback
+        | Tiempo estimado requerido
+    .form-group
+      label(for='statuses')
+        | Estado
+      select#statuses.custom-select(
+        convert-to-number
+        ng-model="$ctrl.ticket.idStatus"
+        required
+        name="status"
+      )
+        option(value="")
+          | Elije un estado
+        option(
+          ng-repeat="option in $ctrl.statuses"
+          value="{{ option.id }}"
+        )
+          | {{ option.name }}
+      .invalid-feedback
+        | Estado inicial requerido
+
+.modal-footer
+  button.btn.btn-primary(ng-click="$ctrl.save($ctrl.ticketForm.$valid)")
+    | Guardar
+  button.btn.btn-secondary(ng-click="$ctrl.dismiss()")
+    | Salir

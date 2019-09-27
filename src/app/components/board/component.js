@@ -6,6 +6,7 @@ import { ticketModalModule } from  './modal/component.js';
 const component = {
   controller: BoardController,
   bindings: {
+    board: '<',
     tickets: '<'
   },
   template: template()

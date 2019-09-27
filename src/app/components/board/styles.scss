@@ -1,0 +1,15 @@
+.board {
+  & &__card {
+    width: 250px;
+    margin: 0 15px 15px
+  }
+
+  & &__card-body {
+  	display: flex;
+  	flex-direction: column;
+  }
+
+  & &__card-body-description {
+  	flex: 1;
+  }
+}

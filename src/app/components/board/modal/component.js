@@ -1,7 +1,8 @@
 import template from './template.pug';
+import { TicketModalController } from  './controller.js';
 
 const component = {
-  controller: function () {},
+  controller: TicketModalController,
   bindings: {
     resolve: '<',
     dismiss: '&',

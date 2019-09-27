@@ -1,18 +1,23 @@
 .home.h-100.bg-light
   .container-fluid
-    .pt-3.font-weight-bold
+    h4.pt-3.font-weight-bold
       | Tableros
+    nav.mt-3(aria-label='breadcrumb')
+      ol.breadcrumb
+        li.breadcrumb-item.active(aria-current='page')
+          | Tableros
+
     .card-deck.mt-3
       .card(
-        ng-repeat="item in $ctrl.board"
-        ui-sref="board({ boardId: item.id})"
-        ng-if="item.id === 1"
+        ng-repeat="board in $ctrl.boards"
+        ui-sref="board({ boardId: board.id})"
+        ng-if="board.id === 1"
       )
         .card-body
           h5.card-title
-            | {{ item.name }}
+            | {{ board.name }}
           p.card-text
             small.text-muted
-              | {{ item.user }}
-          a.btn.btn-primary.stretched-link(ui-sref="board({ boardId: item.id})")
+              | {{ board.user }}
+          a.btn.btn-primary.stretched-link(ui-sref="board({ boardId: board.id})")
             | Ir al tablero

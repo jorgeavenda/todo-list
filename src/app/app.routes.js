@@ -6,8 +6,6 @@ function appRoutes ($locationProvider, $urlRouterProvider, $stateProvider) {
 
   $stateProvider.state('home', homeState);
   $stateProvider.state('board', boardState);
-
-  // $locationProvider.html5Mode(true);
 };
 
 appRoutes.$inject = ['$locationProvider', '$urlRouterProvider', '$stateProvider'];
