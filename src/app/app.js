@@ -8,6 +8,8 @@ import 'ui-bootstrap4';
 import 'lodash/array';
 import { appRoutes } from './app.routes.js';
 import { headerModule } from './components/layout/header/component.js';
+import { alertsModule } from './components/layout/alerts/component.js';
+import { spinerLoaderModule } from './components/layout/spinner-loader/component.js';
 import { BoardsService } from './services/boards.service.js';
 import { TicketsService } from './services/tickets.service.js';
 import { StatusService } from './services/status.service.js';
@@ -15,7 +17,9 @@ import { convertToNumber } from './directives/convert-to-number.directive.js';
 import './app.scss';
 
 const modules = [
-  headerModule.name
+  headerModule.name,
+  alertsModule.name,
+  spinerLoaderModule.name
 ];
 
 const DEPENDENCIES = modules.concat([

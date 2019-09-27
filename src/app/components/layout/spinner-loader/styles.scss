@@ -1,0 +1,13 @@
+.app-spinner-border {
+  text-align: center;
+  position: fixed;
+  z-index: 1070;
+  width: 100%;
+  color: white;
+  top: -100px;
+  transition: all 0.2s ease-out;
+
+  &.app-spinner-border--active {
+    top: 10px;
+  }
+}
