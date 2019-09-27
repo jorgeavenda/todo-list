@@ -42,5 +42,8 @@
             ng-if="false"
           )
             | Editar
-          button.btn.btn-danger.btn-sm.ml-auto(ng-click="$ctrl.delete($event, ticket)")
+          button.btn.btn-danger.btn-sm.ml-auto(
+            ng-click="$ctrl.delete($event, ticket)"
+            ng-disabled="$ctrl.deleting"
+          )
             | Eliminar

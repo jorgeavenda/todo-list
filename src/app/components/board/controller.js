@@ -1,4 +1,4 @@
-function BoardController ($uibModal, TicketsService, StatusService) {
+function BoardController ($uibModal, TicketsService, StatusService, AlertsService, SpinnerLoaderService) {
   this.$onInit = () => {
     StatusService.query().then(res => {
       this.statuses = res.data;
@@ -27,10 +27,24 @@ function BoardController ($uibModal, TicketsService, StatusService) {
     $event.stopPropagation();
     let r = confirm("¿Estas seguro?");
     if (r == true) {
+      this.deleting = true;
+      SpinnerLoaderService.show();
       TicketsService.delete(ticket.id).then(() => {
         this.tickets = this.tickets.filter((t) => {
           return t.id !== ticket.id;
         });
+        AlertsService.addAlert({
+          title: 'Se elimino el ticket correctamente',
+          type: 'success'
+        });
+      }, () => {
+        AlertsService.addAlert({
+          title: 'Ocurrió un error al intentar eliminar el ticket. Inténtalo de nuevo',
+          type: 'danger'
+        });
+      }).finally(() => {
+        SpinnerLoaderService.hide();
+        this.deleting = false;
       });
     }
   };
@@ -45,6 +59,6 @@ function BoardController ($uibModal, TicketsService, StatusService) {
   };
 };
 
-BoardController.$inject = ['$uibModal', 'TicketsService', 'StatusService'];
+BoardController.$inject = ['$uibModal', 'TicketsService', 'StatusService', 'AlertsService', 'SpinnerLoaderService'];
 
 export { BoardController };
