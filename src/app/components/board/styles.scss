@@ -1,4 +1,12 @@
+@import 'bootstrap/scss/_functions.scss';
+@import 'bootstrap/scss/_mixins.scss';
+@import 'bootstrap/scss/_variables.scss';
+
 .board {
+  & &__title {
+    font-size: 1.5rem;
+  }
+
   & &__card {
     width: 250px;
     margin: 0 15px 15px
@@ -11,5 +19,17 @@
 
   & &__card-body-description {
   	flex: 1;
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  .board {
+    & &__title {
+      font-size: 1rem;
+    }
+
+    & &__card {
+      width: 100%;
+    }
   }
 }

@@ -1,10 +1,13 @@
 .board.h-100.bg-light
   .container-fluid
     .d-flex.pt-3.align-items-center
-      h4.font-weight-bold.flex-grow-1
+      .board__title.font-weight-bold.flex-grow-1.mr-3.text-truncate
         | {{ $ctrl.board.name }} - {{ $ctrl.board.user  }}
       button.btn.btn-primary(ng-click="$ctrl.openTicketModal()")
-        | Crear ticket
+        .d-block.d-sm-none
+          | Crear
+        .d-none.d-sm-block
+          | Crear ticket
     nav.mt-3(aria-label='breadcrumb')
       ol.breadcrumb
         li.breadcrumb-item
