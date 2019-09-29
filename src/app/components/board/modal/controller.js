@@ -1,4 +1,4 @@
-function TicketModalController (StatusService, TicketsService, SpinnerLoaderService, AlertsService) {
+function TicketModalController (StatusService, TicketsService, SpinnerLoader, Alerts) {
   this.$onInit = () => {
     this.ticket = this.resolve.ticket ? angular.copy(this.resolve.ticket) : {};
     StatusService.query().then((res) => {
@@ -11,38 +11,38 @@ function TicketModalController (StatusService, TicketsService, SpinnerLoaderServ
     this.ticketForm.$setSubmitted();
     this.ticket.estimatedTime = this.ticket.estimated_time;
     if (valid) {
-      SpinnerLoaderService.show();
+      SpinnerLoader.show();
       this.saving = true;
       if (this.ticket.id) {
         TicketsService.update(this.ticket).then((res) => {
-          AlertsService.addAlert({
+          Alerts.add({
             title: 'Se actualizo el ticket correctamente',
             type: 'success'
           });
           this.close({ $value: res.data });
         }, () => {
-          AlertsService.addAlert({
+          Alerts.add({
             title: 'Ocurrió un error al intentar actualizar el ticket. Inténtalo de nuevo',
             type: 'danger'
           });
         }).finally(() => {
-          SpinnerLoaderService.hide();
+          SpinnerLoader.hide();
           this.saving = false;
         });
       } else {
         TicketsService.create(TicketsService.boardId, this.ticket).then((res) => {
-          AlertsService.addAlert({
+          Alerts.add({
             title: 'Se creo el ticket correctamente',
             type: 'success'
           });
           this.close({ $value: res.data });
         }, () => {
-          AlertsService.addAlert({
+          Alerts.add({
             title: 'Ocurrió un error al intentar crear el ticket. Inténtalo de nuevo',
             type: 'danger'
           });
         }).finally(() => {
-          SpinnerLoaderService.hide();
+          SpinnerLoader.hide();
           this.saving = false;
         });
       }
@@ -50,6 +50,6 @@ function TicketModalController (StatusService, TicketsService, SpinnerLoaderServ
   };
 };
 
-TicketModalController.$inject = ['StatusService', 'TicketsService', 'SpinnerLoaderService', 'AlertsService'];
+TicketModalController.$inject = ['StatusService', 'TicketsService', 'SpinnerLoader', 'Alerts'];
 
 export { TicketModalController };

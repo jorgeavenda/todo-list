@@ -1,19 +1,19 @@
 import template from './template.pug';
-import { SpinnerLoaderService } from './spinner-loader.service.js';
+import { SpinnerLoader } from './spinner-loader.factory.js';
 import './styles.scss';
 
 const component = {
   controller: [
-    'SpinnerLoaderService',
-    function (SpinnerLoaderService) {
-      this.active = () => SpinnerLoaderService.active;
+    'SpinnerLoader',
+    function (SpinnerLoader) {
+      this.spinner = SpinnerLoader;
     }
   ],
   template: template()
 };
 
 const spinerLoaderModule = angular.module('app.spinner-loader', [])
-                                  .service('SpinnerLoaderService', SpinnerLoaderService)
+                                  .factory('SpinnerLoader', SpinnerLoader)
                                   .component('spinnerLoaderComponent', component);
 
 export { spinerLoaderModule };

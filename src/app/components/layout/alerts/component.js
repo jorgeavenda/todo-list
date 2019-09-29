@@ -1,17 +1,15 @@
 import template from './template.pug';
-import { AlertsService } from './alerts.service.js';
+import { Alerts } from './alerts.factory.js';
 import './styles.scss';
 
 const component = {
   controller: [
-    'AlertsService',
-    function (AlertsService) {
-      this.$onInit = () => {
-        this.alerts = AlertsService.alerts;
-      };
+    'Alerts',
+    function (Alerts) {
+      this.alerts = Alerts.list;
 
       this.closeAlert = (index) => {
-        this.alerts.splice(index, 1);
+        Alerts.remove(index);
       };
     }
   ],
@@ -19,7 +17,7 @@ const component = {
 };
 
 const alertsModule = angular.module('app.alert', [])
-                            .service('AlertsService', AlertsService)
+                            .factory('Alerts', Alerts)
                             .component('alertsComponent', component);
 
 export { alertsModule };

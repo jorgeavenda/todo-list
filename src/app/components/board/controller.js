@@ -1,4 +1,4 @@
-function BoardController ($uibModal, TicketsService, StatusService, AlertsService, SpinnerLoaderService) {
+function BoardController ($uibModal, TicketsService, StatusService, Alerts, SpinnerLoader) {
   this.$onInit = () => {
     StatusService.query().then(res => {
       this.statuses = res.data;
@@ -28,32 +28,32 @@ function BoardController ($uibModal, TicketsService, StatusService, AlertsServic
     let r = confirm("¿Estas seguro?");
     if (r == true) {
       this.deleting = true;
-      SpinnerLoaderService.show();
+      SpinnerLoader.show();
       TicketsService.delete(ticket.id).then(() => {
         this.tickets = this.tickets.filter((t) => {
           return t.id !== ticket.id;
         });
-        AlertsService.addAlert({
+        Alerts.add({
           title: 'Se elimino el ticket correctamente',
           type: 'success'
         });
       }, () => {
-        AlertsService.addAlert({
+        Alerts.add({
           title: 'Ocurrió un error al intentar eliminar el ticket. Inténtalo de nuevo',
           type: 'danger'
         });
       }).finally(() => {
-        SpinnerLoaderService.hide();
+        SpinnerLoader.hide();
         this.deleting = false;
       });
     }
   };
 
   this.setStatus = (ticket, status) => {
-    SpinnerLoaderService.show();
+    SpinnerLoader.show();
     ticket.idStatus = parseInt(status.id, 10);
     TicketsService.update(ticket).then((res) => {
-      AlertsService.addAlert({
+      Alerts.add({
         title: 'Se actualizo el ticket correctamente',
         type: 'success'
       });
@@ -61,16 +61,16 @@ function BoardController ($uibModal, TicketsService, StatusService, AlertsServic
         angular.merge(ticket, res.data);
       });
     }, () => {
-      AlertsService.addAlert({
+      Alerts.add({
         title: 'Ocurrió un error al intentar actualizar el ticket. Inténtalo de nuevo',
         type: 'danger'
       });
     }).finally(() => {
-      SpinnerLoaderService.hide();
+      SpinnerLoader.hide();
     });
   };
 };
 
-BoardController.$inject = ['$uibModal', 'TicketsService', 'StatusService', 'AlertsService', 'SpinnerLoaderService'];
+BoardController.$inject = ['$uibModal', 'TicketsService', 'StatusService', 'Alerts', 'SpinnerLoader'];
 
 export { BoardController };

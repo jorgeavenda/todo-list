@@ -35,7 +35,10 @@
             | {{ ticket.description }}
           p.card-text
             small.text-muted
-              | Hora{{ ticket.estimated_time > 1 ? 's' : '' }} estimada{{ ticket.estimated_time >  1 ? 's' : '' }} {{ ticket.estimated_time }}
+              | Hora{{ ticket.estimated_time > 1 ? 's' : '' }} estimada{{ ticket.estimated_time >  1 ? 's' : '' }}: {{ ticket.estimated_time }}
+            br
+            small.text-muted
+              | Creado el: {{ ticket.date | date:'dd/MM/yyyy' }}
         .card-footer.d-flex
           button.btn.btn-primary.btn-sm.mr-2(
             ng-click="$ctrl.openTicketModal(ticket)"
