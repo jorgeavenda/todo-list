@@ -4,7 +4,7 @@ const boardState = {
   component: 'boardComponent',
   lazyLoad: function ($transition$) {
     var $ocLazyLoad = $transition$.injector().get('$ocLazyLoad');
-    return System.import('./component.js')
+    return import('./component.js')
                  .then(mod => $ocLazyLoad.load(mod.boardModule));
   },
   resolve: {
